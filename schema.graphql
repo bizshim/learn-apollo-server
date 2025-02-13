@@ -1,0 +1,503 @@
+scalar DateTime
+
+type estimate_request {
+  id: String!
+  business_partner_code: String!
+  work_name: String!
+  project_name: String!
+  delivery_zip: String!
+  delivery_address: String!
+  request_at: DateTime!
+  src_department_code: String!
+  src_employee_code: String!
+  dst_factory_type_id: String!
+  estimate_kind: Int!
+  delivery_at: DateTime
+  response_at: DateTime
+  estimate_status: Int!
+  create_at: DateTime!
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_submission: [estimate_submission]!
+  tank_estimate_request: [tank_estimate_request]!
+}
+
+type estimate_submission {
+  id: String!
+  estimate_request_id: String!
+  business_partner_code: String!
+  work_name: String!
+  project_name: String!
+  estimate_at: DateTime!
+  estimate_no: String
+  payment_terms: String
+  construction_period: String
+  estimate_due_at: DateTime!
+  interest_rate: Int!
+  gross_margin_rate: Float
+  purchase_price: Float
+  contact_employee_code: String!
+  approve1_employee_code: String
+  approve2_employee_code: String
+  approver_comment: String
+  create_at: DateTime!
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_request: estimate_request!
+  estimate_submission_detail: [estimate_submission_detail]!
+}
+
+type estimate_submission_detail {
+  id: String!
+  estimate_submission_id: String!
+  detail_type: Int
+  tank_estimate_request_id: String
+  product_code: String
+  num: Float!
+  cost_price: Float!
+  profit_margin: Float!
+  unit_price: Float!
+  amount: Float!
+  remark: String
+  create_at: DateTime!
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_submission: estimate_submission!
+  tank_estimate_request: tank_estimate_request
+}
+
+type tank_estimate_request {
+  id: String!
+  estimate_request_id: String
+  tank_standard_id: String
+  capacity: Int
+  diameter: Int
+  tank_type_id: String
+  thickness: Int
+  tank_material_type_id: String
+  nozzle_material_type_id: String
+  mirror_finish_type_id: String
+  partition_room_num: Int
+  partition_board_type_id: String
+  protector_type: String
+  protector_height: Int
+  protector_material_type_id: String
+  burial_method_type_id: String
+  interior_cleaning_type_id: String
+  process_photo_type_id: String
+  participation_fee_type_id: String
+  protector_check_position_x: Float
+  protector_check_position_y: Float
+  nozzle_check_position_x: Float
+  nozzle_check_position_y: Float
+  num: Int
+  remarks: String
+  tank_estimate_id: String
+  tank_estimate_complete_at: DateTime
+  tank_estimate_price: Int
+  create_at: DateTime!
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_submission_detail: [estimate_submission_detail]!
+  estimate_request: estimate_request
+  tank_estimate_request_drawing: [tank_estimate_request_drawing]!
+  tank_estimate_request_manhole: [tank_estimate_request_manhole]!
+  tank_estimate_request_nozzle: [tank_estimate_request_nozzle]!
+}
+
+type tank_estimate_request_drawing {
+  id: String!
+  tank_estimate_request_id: String!
+  no: Int!
+  key: String
+  type: Int
+  create_at: DateTime!
+  update_at: DateTime
+  delete_at: DateTime
+  tank_estimate_request: tank_estimate_request!
+  tank_estimate_request_manhole: [tank_estimate_request_manhole]!
+  tank_estimate_request_nozzle: [tank_estimate_request_nozzle]!
+}
+
+type tank_estimate_request_manhole {
+  id: String!
+  tank_estimate_request_id: String!
+  no: Int!
+  diameter: Int!
+  height: Int!
+  tank_estimate_request_drawing_id: String
+  check_position_x: Float
+  check_position_y: Float
+  create_at: DateTime!
+  update_at: DateTime
+  delete_at: DateTime
+  tank_estimate_request: tank_estimate_request!
+  tank_estimate_request_drawing: tank_estimate_request_drawing
+}
+
+type tank_estimate_request_nozzle {
+  id: String!
+  tank_estimate_request_id: String!
+  no: Int!
+  name: Int!
+  size: Int!
+  num: Int!
+  material_name_joint_type_id: String!
+  material_id: String!
+  drop_status_type_id: String!
+  tank_estimate_request_drawing_id: String
+  check_position_x: Float
+  check_position_y: Float
+  create_at: DateTime!
+  update_at: DateTime
+  delete_at: DateTime
+  tank_estimate_request_drawing: tank_estimate_request_drawing
+  tank_estimate_request: tank_estimate_request!
+}
+
+input estimate_requestCreateInput {
+  business_partner_code: String
+  work_name: String
+  project_name: String
+  delivery_zip: String
+  delivery_address: String
+  request_at: DateTime
+  src_department_code: String
+  src_employee_code: String
+  dst_factory_type_id: String
+  estimate_kind: Int
+  delivery_at: DateTime
+  response_at: DateTime
+  estimate_status: Int
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_submission: [estimate_submission]
+  tank_estimate_request: [tank_estimate_request]
+}
+
+input estimate_requestUpdateInput {
+  business_partner_code: String
+  work_name: String
+  project_name: String
+  delivery_zip: String
+  delivery_address: String
+  request_at: DateTime
+  src_department_code: String
+  src_employee_code: String
+  dst_factory_type_id: String
+  estimate_kind: Int
+  delivery_at: DateTime
+  response_at: DateTime
+  estimate_status: Int
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_submission: [estimate_submission]
+  tank_estimate_request: [tank_estimate_request]
+}
+
+input estimate_requestWhereUniqueInput {
+  id: String
+}
+
+input estimate_submissionCreateInput {
+  business_partner_code: String
+  work_name: String
+  project_name: String
+  estimate_at: DateTime
+  estimate_no: String
+  payment_terms: String
+  construction_period: String
+  estimate_due_at: DateTime
+  interest_rate: Int
+  gross_margin_rate: Float
+  purchase_price: Float
+  contact_employee_code: String
+  approve1_employee_code: String
+  approve2_employee_code: String
+  approver_comment: String
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_request: estimate_request
+  estimate_submission_detail: [estimate_submission_detail]
+}
+
+input estimate_submissionUpdateInput {
+  business_partner_code: String
+  work_name: String
+  project_name: String
+  estimate_at: DateTime
+  estimate_no: String
+  payment_terms: String
+  construction_period: String
+  estimate_due_at: DateTime
+  interest_rate: Int
+  gross_margin_rate: Float
+  purchase_price: Float
+  contact_employee_code: String
+  approve1_employee_code: String
+  approve2_employee_code: String
+  approver_comment: String
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_request: estimate_request
+  estimate_submission_detail: [estimate_submission_detail]
+}
+
+input estimate_submissionWhereUniqueInput {
+  id: String
+}
+
+input estimate_submission_detailCreateInput {
+  detail_type: Int
+  product_code: String
+  num: Float
+  cost_price: Float
+  profit_margin: Float
+  unit_price: Float
+  amount: Float
+  remark: String
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_submission: estimate_submission
+  tank_estimate_request: tank_estimate_request
+}
+
+input estimate_submission_detailUpdateInput {
+  detail_type: Int
+  product_code: String
+  num: Float
+  cost_price: Float
+  profit_margin: Float
+  unit_price: Float
+  amount: Float
+  remark: String
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_submission: estimate_submission
+  tank_estimate_request: tank_estimate_request
+}
+
+input estimate_submission_detailWhereUniqueInput {
+  id: String
+}
+
+input tank_estimate_requestCreateInput {
+  tank_standard_id: String
+  capacity: Int
+  diameter: Int
+  tank_type_id: String
+  thickness: Int
+  tank_material_type_id: String
+  nozzle_material_type_id: String
+  mirror_finish_type_id: String
+  partition_room_num: Int
+  partition_board_type_id: String
+  protector_type: String
+  protector_height: Int
+  protector_material_type_id: String
+  burial_method_type_id: String
+  interior_cleaning_type_id: String
+  process_photo_type_id: String
+  participation_fee_type_id: String
+  protector_check_position_x: Float
+  protector_check_position_y: Float
+  nozzle_check_position_x: Float
+  nozzle_check_position_y: Float
+  num: Int
+  remarks: String
+  tank_estimate_id: String
+  tank_estimate_complete_at: DateTime
+  tank_estimate_price: Int
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_submission_detail: [estimate_submission_detail]
+  estimate_request: estimate_request
+  tank_estimate_request_drawing: [tank_estimate_request_drawing]
+  tank_estimate_request_manhole: [tank_estimate_request_manhole]
+  tank_estimate_request_nozzle: [tank_estimate_request_nozzle]
+}
+
+input tank_estimate_requestUpdateInput {
+  tank_standard_id: String
+  capacity: Int
+  diameter: Int
+  tank_type_id: String
+  thickness: Int
+  tank_material_type_id: String
+  nozzle_material_type_id: String
+  mirror_finish_type_id: String
+  partition_room_num: Int
+  partition_board_type_id: String
+  protector_type: String
+  protector_height: Int
+  protector_material_type_id: String
+  burial_method_type_id: String
+  interior_cleaning_type_id: String
+  process_photo_type_id: String
+  participation_fee_type_id: String
+  protector_check_position_x: Float
+  protector_check_position_y: Float
+  nozzle_check_position_x: Float
+  nozzle_check_position_y: Float
+  num: Int
+  remarks: String
+  tank_estimate_id: String
+  tank_estimate_complete_at: DateTime
+  tank_estimate_price: Int
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  estimate_submission_detail: [estimate_submission_detail]
+  estimate_request: estimate_request
+  tank_estimate_request_drawing: [tank_estimate_request_drawing]
+  tank_estimate_request_manhole: [tank_estimate_request_manhole]
+  tank_estimate_request_nozzle: [tank_estimate_request_nozzle]
+}
+
+input tank_estimate_requestWhereUniqueInput {
+  id: String
+}
+
+input tank_estimate_request_drawingCreateInput {
+  no: Int
+  key: String
+  type: Int
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  tank_estimate_request: tank_estimate_request
+  tank_estimate_request_manhole: [tank_estimate_request_manhole]
+  tank_estimate_request_nozzle: [tank_estimate_request_nozzle]
+}
+
+input tank_estimate_request_drawingUpdateInput {
+  no: Int
+  key: String
+  type: Int
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  tank_estimate_request: tank_estimate_request
+  tank_estimate_request_manhole: [tank_estimate_request_manhole]
+  tank_estimate_request_nozzle: [tank_estimate_request_nozzle]
+}
+
+input tank_estimate_request_drawingWhereUniqueInput {
+  id: String
+}
+
+input tank_estimate_request_manholeCreateInput {
+  no: Int
+  diameter: Int
+  height: Int
+  check_position_x: Float
+  check_position_y: Float
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  tank_estimate_request: tank_estimate_request
+  tank_estimate_request_drawing: tank_estimate_request_drawing
+}
+
+input tank_estimate_request_manholeUpdateInput {
+  no: Int
+  diameter: Int
+  height: Int
+  check_position_x: Float
+  check_position_y: Float
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  tank_estimate_request: tank_estimate_request
+  tank_estimate_request_drawing: tank_estimate_request_drawing
+}
+
+input tank_estimate_request_manholeWhereUniqueInput {
+  id: String
+}
+
+input tank_estimate_request_nozzleCreateInput {
+  no: Int
+  name: Int
+  size: Int
+  num: Int
+  material_name_joint_type_id: String
+  material_id: String
+  drop_status_type_id: String
+  check_position_x: Float
+  check_position_y: Float
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  tank_estimate_request_drawing: tank_estimate_request_drawing
+  tank_estimate_request: tank_estimate_request
+}
+
+input tank_estimate_request_nozzleUpdateInput {
+  no: Int
+  name: Int
+  size: Int
+  num: Int
+  material_name_joint_type_id: String
+  material_id: String
+  drop_status_type_id: String
+  check_position_x: Float
+  check_position_y: Float
+  create_at: DateTime
+  update_at: DateTime
+  delete_at: DateTime
+  tank_estimate_request_drawing: tank_estimate_request_drawing
+  tank_estimate_request: tank_estimate_request
+}
+
+input tank_estimate_request_nozzleWhereUniqueInput {
+  id: String
+}
+
+type Query {
+  estimate_request(where: estimate_requestWhereUniqueInput!): estimate_request
+  estimate_requests: [estimate_request!]!
+  estimate_submission(where: estimate_submissionWhereUniqueInput!): estimate_submission
+  estimate_submissions: [estimate_submission!]!
+  estimate_submission_detail(where: estimate_submission_detailWhereUniqueInput!): estimate_submission_detail
+  estimate_submission_details: [estimate_submission_detail!]!
+  tank_estimate_request(where: tank_estimate_requestWhereUniqueInput!): tank_estimate_request
+  tank_estimate_requests: [tank_estimate_request!]!
+  tank_estimate_request_drawing(where: tank_estimate_request_drawingWhereUniqueInput!): tank_estimate_request_drawing
+  tank_estimate_request_drawings: [tank_estimate_request_drawing!]!
+  tank_estimate_request_manhole(where: tank_estimate_request_manholeWhereUniqueInput!): tank_estimate_request_manhole
+  tank_estimate_request_manholes: [tank_estimate_request_manhole!]!
+  tank_estimate_request_nozzle(where: tank_estimate_request_nozzleWhereUniqueInput!): tank_estimate_request_nozzle
+  tank_estimate_request_nozzles: [tank_estimate_request_nozzle!]!
+}
+
+type Mutation {
+  createestimate_request(data: estimate_requestCreateInput!): estimate_request!
+  updateestimate_request(where: estimate_requestWhereUniqueInput!, data: estimate_requestUpdateInput!): estimate_request!
+  deleteestimate_request(where: estimate_requestWhereUniqueInput!): estimate_request
+  createestimate_submission(data: estimate_submissionCreateInput!): estimate_submission!
+  updateestimate_submission(where: estimate_submissionWhereUniqueInput!, data: estimate_submissionUpdateInput!): estimate_submission!
+  deleteestimate_submission(where: estimate_submissionWhereUniqueInput!): estimate_submission
+  createestimate_submission_detail(data: estimate_submission_detailCreateInput!): estimate_submission_detail!
+  updateestimate_submission_detail(where: estimate_submission_detailWhereUniqueInput!, data: estimate_submission_detailUpdateInput!): estimate_submission_detail!
+  deleteestimate_submission_detail(where: estimate_submission_detailWhereUniqueInput!): estimate_submission_detail
+  createtank_estimate_request(data: tank_estimate_requestCreateInput!): tank_estimate_request!
+  updatetank_estimate_request(where: tank_estimate_requestWhereUniqueInput!, data: tank_estimate_requestUpdateInput!): tank_estimate_request!
+  deletetank_estimate_request(where: tank_estimate_requestWhereUniqueInput!): tank_estimate_request
+  createtank_estimate_request_drawing(data: tank_estimate_request_drawingCreateInput!): tank_estimate_request_drawing!
+  updatetank_estimate_request_drawing(where: tank_estimate_request_drawingWhereUniqueInput!, data: tank_estimate_request_drawingUpdateInput!): tank_estimate_request_drawing!
+  deletetank_estimate_request_drawing(where: tank_estimate_request_drawingWhereUniqueInput!): tank_estimate_request_drawing
+  createtank_estimate_request_manhole(data: tank_estimate_request_manholeCreateInput!): tank_estimate_request_manhole!
+  updatetank_estimate_request_manhole(where: tank_estimate_request_manholeWhereUniqueInput!, data: tank_estimate_request_manholeUpdateInput!): tank_estimate_request_manhole!
+  deletetank_estimate_request_manhole(where: tank_estimate_request_manholeWhereUniqueInput!): tank_estimate_request_manhole
+  createtank_estimate_request_nozzle(data: tank_estimate_request_nozzleCreateInput!): tank_estimate_request_nozzle!
+  updatetank_estimate_request_nozzle(where: tank_estimate_request_nozzleWhereUniqueInput!, data: tank_estimate_request_nozzleUpdateInput!): tank_estimate_request_nozzle!
+  deletetank_estimate_request_nozzle(where: tank_estimate_request_nozzleWhereUniqueInput!): tank_estimate_request_nozzle
+}
