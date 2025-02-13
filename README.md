@@ -1,10 +1,4 @@
-# APOLLO SERVER 学習
+# タンク見積アプリStep2 GraphQLサーバー
 
-
-## Prisma
-
-### 既存テーブルからschema.prismaを生成
-npx prisma db pull
-
-### Schema.graphqlを生成
-node scripts/generate-schema.js 
+## スキーマのExport
+`npx postgraphile -c "postgresql://postgres:tankestimate1Pwd@localhost:5432/tankestimate?schema=sales" --schema app --export-schema graphql-schema.graphql`
